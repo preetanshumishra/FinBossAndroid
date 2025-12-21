@@ -1,0 +1,127 @@
+# Android Studio generated files
+.gradle/
+.idea/
+build/
+*.iml
+*.iws
+*.ipr
+
+# Android build artifacts
+*.apk
+*.aar
+*.ap_
+*.aab
+bin/
+gen/
+out/
+
+# Local configuration
+local.properties
+gradle.properties
+
+# Log files
+*.log
+*.pot
+*.mo
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/vcs.xml
+.idea/misc.xml
+.idea/uiDesigner.xml
+.idea/codeStyles/
+.idea/assetWizardSettings.xml
+.idea/inspectionProfiles/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Gradle wrapper
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# Signing files
+*.jks
+*.keystore
+*.pem
+*.key
+
+# Test coverage
+coverage/
+*.exec
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Build intermediates
+.cxx/
+.externalNativeBuild/
+
+# Lint
+lint-results*.xml
+lint-results*.html
+
+# Profiling
+*.trace
+*.perflib
+
+# APK analysis
+apk-analysis/
+
+# Translation editor
+translations/
+
+# AndroidStudio specific
+captures/
+.navigation/
+
+# Kotlin
+.kotlin/
+
+# Java
+*.class
+*.jar
+*.war
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# Proguard
+proguard/
+proguardFiles/
+
+# Emulator snapshots
+.avd/
+
+# Firebase
+.firebase/
+.firebaserc
+
+# Misc
+.directory
+*.rej
