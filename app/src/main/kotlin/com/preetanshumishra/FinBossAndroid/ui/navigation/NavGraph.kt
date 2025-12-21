@@ -13,6 +13,7 @@ import com.preetanshumishra.FinBossAndroid.services.AuthService
 import com.preetanshumishra.FinBossAndroid.ui.screens.HomeScreen
 import com.preetanshumishra.FinBossAndroid.ui.screens.LoginScreen
 import com.preetanshumishra.FinBossAndroid.ui.screens.RegisterScreen
+import com.preetanshumishra.FinBossAndroid.ui.screens.TransactionListScreen
 
 @Composable
 fun SetupNavGraph(authService: AuthService) {
@@ -30,7 +31,10 @@ fun SetupNavGraph(authService: AuthService) {
             RegisterScreen(navController = navController)
         }
         composable("home") {
-            HomeScreen()
+            HomeScreen(navController = navController)
+        }
+        composable("transactions") {
+            TransactionListScreen()
         }
     }
 

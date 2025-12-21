@@ -14,11 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.preetanshumishra.FinBossAndroid.viewmodel.HomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    navController: NavController? = null,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val user by viewModel.user.collectAsState()
@@ -65,7 +67,7 @@ fun HomeScreen(
             NavigationCard(
                 icon = Icons.Default.Settings,
                 title = "Transactions",
-                onClick = { /* TODO: Navigate to Transactions */ }
+                onClick = { navController?.navigate("transactions") }
             )
 
             NavigationCard(
