@@ -6,42 +6,37 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.preetanshumishra.FinBossAndroid.ui.screens.LoginScreen
+import androidx.lifecycle.lifecycleScope
+import com.preetanshumishra.FinBossAndroid.services.AuthService
+import com.preetanshumishra.FinBossAndroid.ui.navigation.SetupNavGraph
 import com.preetanshumishra.FinBossAndroid.ui.theme.FinBossTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var authService: AuthService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        lifecycleScope.launch {
+            authService.checkPersistedAuth()
+        }
+
         setContent {
             FinBossTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    FinBossNavigation()
+                    SetupNavGraph(authService = authService)
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun FinBossNavigation() {
-    val navController = rememberNavController()
-
-    NavHost(navController = navController, startDestination = "login") {
-        composable("login") {
-            LoginScreen(navController = navController)
-        }
-        composable("home") {
-            // HomeScreen will be implemented
         }
     }
 }

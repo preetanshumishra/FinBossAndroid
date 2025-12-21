@@ -1,7 +1,9 @@
 package com.preetanshumishra.FinBossAndroid.ui.screens
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -12,13 +14,15 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.preetanshumishra.FinBossAndroid.viewmodel.LoginViewModel
+import com.preetanshumishra.FinBossAndroid.viewmodel.RegisterViewModel
 
 @Composable
-fun LoginScreen(
+fun RegisterScreen(
     navController: NavController,
-    viewModel: LoginViewModel = hiltViewModel()
+    viewModel: RegisterViewModel = hiltViewModel()
 ) {
+    val firstName by viewModel.firstName.collectAsState()
+    val lastName by viewModel.lastName.collectAsState()
     val email by viewModel.email.collectAsState()
     val password by viewModel.password.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
@@ -29,22 +33,42 @@ fun LoginScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp),
+            .padding(24.dp)
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "FinBoss",
-            style = MaterialTheme.typography.displayLarge,
-            color = MaterialTheme.colorScheme.primary,
+            text = "Create Account",
+            style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier.padding(bottom = 12.dp)
         )
 
         Text(
-            text = "Financial Management",
-            style = MaterialTheme.typography.bodyMedium,
+            text = "Join FinBoss to manage your finances",
+            style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(bottom = 32.dp)
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
+
+        OutlinedTextField(
+            value = firstName,
+            onValueChange = viewModel::updateFirstName,
+            label = { Text("First Name") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 12.dp),
+            singleLine = true
+        )
+
+        OutlinedTextField(
+            value = lastName,
+            onValueChange = viewModel::updateLastName,
+            label = { Text("Last Name") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 12.dp),
+            singleLine = true
         )
 
         OutlinedTextField(
@@ -53,7 +77,7 @@ fun LoginScreen(
             label = { Text("Email") },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 16.dp),
+                .padding(bottom = 12.dp),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             singleLine = true
         )
@@ -91,11 +115,11 @@ fun LoginScreen(
         }
 
         Button(
-            onClick = { viewModel.login() },
+            onClick = { viewModel.register() },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp),
-            enabled = !isLoading && email.isNotEmpty() && password.isNotEmpty()
+            enabled = !isLoading
         ) {
             if (isLoading) {
                 CircularProgressIndicator(
@@ -103,17 +127,19 @@ fun LoginScreen(
                     color = MaterialTheme.colorScheme.onPrimary
                 )
             } else {
-                Text("Login")
+                Text("Sign Up")
             }
         }
 
+        Spacer(modifier = Modifier.weight(1f))
+
         TextButton(
-            onClick = { navController.navigate("register") },
+            onClick = { navController.popBackStack() },
             modifier = Modifier.padding(top = 16.dp)
         ) {
-            Text("Don't have an account? ")
+            Text("Already have an account? ")
             Text(
-                "Sign up",
+                "Login",
                 color = MaterialTheme.colorScheme.primary
             )
         }
