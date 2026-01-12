@@ -316,12 +316,14 @@ emulator -avd <emulator_name> -wipe-data
 ./gradlew tasks                # List available tasks
 ```
 
-## Related Projects
+## FinBoss Ecosystem
 
-- **FinBossAPI** - Backend API
-- **FinBossiOS** - Native iOS app
-- **FinBossWeb** - React web app
-- **FinBossMobile** - React Native app
+This project is part of the FinBoss financial management ecosystem:
+
+- **[FinBossAPI](https://github.com/preetanshumishra/FinBossAPI)** - Node.js/Express backend API with MongoDB
+- **[FinBossWeb](https://github.com/preetanshumishra/FinBossWeb)** - React web frontend
+- **[FinBossMobile](https://github.com/preetanshumishra/FinBossMobile)** - React Native mobile app (iOS/Android via Expo)
+- **[FinBossiOS](https://github.com/preetanshumishra/FinBossiOS)** - Native iOS app (Swift + SwiftUI)
 
 ## License
 
