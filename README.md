@@ -4,7 +4,7 @@ Native Android application for the FinBoss financial management ecosystem. Built
 
 ## Overview
 
-FinBoss Android is a native Android app providing financial management capabilities including transactions, budgets, analytics, and user authentication. The app follows the MVVM architecture pattern with Hilt for dependency injection.
+FinBoss Android is a native Android app providing financial management capabilities including transactions, budgets, analytics, and user authentication. The app follows the MVVM architecture pattern with Dagger for dependency injection and Jetpack Compose for modern declarative UI.
 
 ## Tech Stack
 
@@ -12,7 +12,7 @@ FinBoss Android is a native Android app providing financial management capabilit
 - **UI Framework:** Jetpack Compose 1.6.0
 - **Min SDK:** API 24 (Android 7.0)
 - **Target SDK:** API 34 (Android 14)
-- **Dependency Injection:** Hilt 2.48.1
+- **Dependency Injection:** Dagger 2.48.1
 - **Networking:** Retrofit 2.10.0 + OkHttp 4.11.0
 - **Database:** Room 2.6.1
 - **Storage:** DataStore 1.0.0
@@ -116,10 +116,12 @@ FinBossAndroid/
 - **Models:** Data classes for API responses and local storage
 
 ### Dependency Injection
-Uses Hilt for managing dependencies:
-- `@HiltViewModel`: ViewModel creation and injection
-- `@Inject`: Constructor injection for services
-- Modules: Centralized dependency definitions
+Uses Dagger for managing dependencies:
+- **AppComponent:** Central Dagger component that defines the dependency graph
+- **AppDependencies:** Container for accessing all singletons throughout the app
+- **ViewModelFactory:** Creates ViewModels with injected dependencies
+- **Modules:** AppModule and AuthModule provide dependency instances
+- Constructor injection for all services and ViewModels
 
 ### Data Flow
 1. **UI screens** trigger actions on **ViewModels**
@@ -132,31 +134,85 @@ Uses Hilt for managing dependencies:
 ## Dependencies
 
 Key libraries:
-- **Hilt:** Dependency injection framework
+- **Dagger:** Dependency injection framework with code generation
 - **Retrofit:** REST API client
 - **OkHttp:** HTTP client with logging
 - **Room:** Local SQLite database
 - **Compose:** Modern declarative UI
-- **Coroutines:** Async programming
+- **Coroutines:** Async programming and Flow for reactive state
 
 Install/Update with:
 ```bash
 ./gradlew build
 ```
 
+## Dependency Injection Setup
+
+### How Dagger Works in FinBoss Android
+
+1. **Application Initialization** (`FinBossApplication.kt`):
+   - Builds `DaggerAppComponent` on app startup
+   - Creates `AppDependencies` container
+   - Makes dependencies globally accessible
+
+2. **Service Provision** (Modules):
+   - `AppModule.kt`: Provides network and storage dependencies
+   - `AuthModule.kt`: Provides authentication services
+   - All services are cached as singletons
+
+3. **ViewModel Creation** (`ViewModelFactory.kt`):
+   - Injects dependencies into ViewModels
+   - Used in Compose screens via `remember`
+
+4. **Accessing Dependencies**:
+   ```kotlin
+   // In Activity
+   val authService = appDependencies.authService
+
+   // In Compose
+   val viewModel = remember {
+       val owner = LocalViewModelStoreOwner.current ?: error("No owner")
+       ViewModelProvider(owner.viewModelStore, ViewModelFactory())
+           .get(LoginViewModel::class.java)
+   }
+   ```
+
+### Adding a New Dependency
+
+1. Add provider method in appropriate module:
+   ```kotlin
+   @Provides
+   @Singleton
+   fun provideMyService(apiService: ApiService): MyService {
+       return MyService(apiService)
+   }
+   ```
+
+2. Add to `AppComponent.kt`:
+   ```kotlin
+   val myService: MyService
+   ```
+
+3. Add to `AppDependencies.kt`:
+   ```kotlin
+   val myService: MyService = appComponent.myService
+   ```
+
+4. Use in ViewModel or Activity via `appDependencies.myService`
+
 ## Configuration
 
 ### Environment
-Update backend API URL in `ApiClient.kt`:
+Update backend API URL in `AppModule.kt`:
 ```kotlin
-const val BASE_URL = "http://10.0.2.2:5000/" // Emulator
+private const val BASE_URL = "http://10.0.2.2:5000" // Emulator
 // or
-const val BASE_URL = "http://localhost:5000/" // Physical device
+private const val BASE_URL = "http://localhost:5000" // Physical device
 ```
 
 For production:
 ```kotlin
-const val BASE_URL = "https://api.finboss.com/"
+private const val BASE_URL = "https://finbossapi-production.up.railway.app"
 ```
 
 ### Build Configuration
@@ -170,12 +226,13 @@ targetSdk = 34
 
 - ✅ User Authentication (Login/Register)
 - ✅ Secure Token Storage (DataStore)
-- ✅ API Integration (Retrofit)
-- ✅ Jetpack Compose UI
-- ✅ MVVM Architecture
-- ✅ Hilt Dependency Injection
-- ✅ Room Database
-- ✅ Coroutines & Flow
+- ✅ API Integration (Retrofit with OkHttp)
+- ✅ Jetpack Compose UI with Material3
+- ✅ MVVM Architecture with ViewModels
+- ✅ Dagger Dependency Injection
+- ✅ Room Database Support
+- ✅ Coroutines & Flow for reactive state
+- ✅ Transaction Management
 - ✅ Android 7.0+ Compatibility
 
 ## Development Guidelines
@@ -189,7 +246,7 @@ targetSdk = 34
 ### Adding Dependencies
 1. Add dependency to `app/build.gradle.kts`
 2. Run `./gradlew build` to sync
-3. Add Hilt module if DI needed
+3. If adding a new service, add provider method to AppModule or AuthModule
 
 ### Testing
 - Unit tests in `app/src/test/`
