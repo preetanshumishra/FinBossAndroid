@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
-    kotlin("android")
-    kotlin("kapt")
+    id("com.google.devtools.ksp")
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
@@ -35,10 +34,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = "17"
     }
 
     buildFeatures {
@@ -90,12 +85,12 @@ dependencies {
 
     // Dagger Dependency Injection (Kotlin 2.2.0 support)
     implementation("com.google.dagger:dagger:2.59.1")
-    kapt("com.google.dagger:dagger-compiler:2.59.1")
+    ksp("com.google.dagger:dagger-compiler:2.59.1")
 
     // Room Database
     implementation("androidx.room:room-runtime:2.8.0")
     implementation("androidx.room:room-ktx:2.8.0")
-    kapt("androidx.room:room-compiler:2.8.0")
+    ksp("androidx.room:room-compiler:2.8.0")
 
     // DataStore (for encrypted preferences)
     implementation("androidx.datastore:datastore-preferences:1.2.0")

@@ -101,6 +101,7 @@ captures/
 *.class
 *.jar
 *.war
+!gradle/wrapper/gradle-wrapper.jar
 
 # Maven
 target/
