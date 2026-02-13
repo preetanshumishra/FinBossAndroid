@@ -16,19 +16,3 @@ data class Transaction(
     @SerializedName("updatedAt")
     val updatedAt: Date
 )
-
-data class CreateTransactionRequest(
-    val type: String,
-    val amount: Double,
-    val category: String,
-    val description: String? = null,
-    val date: Date
-)
-
-data class UpdateTransactionRequest(
-    val type: String? = null,
-    val amount: Double? = null,
-    val category: String? = null,
-    val description: String? = null,
-    val date: Date? = null
-)

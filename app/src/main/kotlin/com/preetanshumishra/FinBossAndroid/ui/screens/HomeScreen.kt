@@ -1,9 +1,7 @@
 package com.preetanshumishra.FinBossAndroid.ui.screens
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
@@ -11,11 +9,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NavController
+import com.preetanshumishra.FinBossAndroid.ui.components.NavigationCard
 import com.preetanshumishra.FinBossAndroid.viewmodel.HomeViewModel
 import com.preetanshumishra.FinBossAndroid.viewmodel.ViewModelFactory
 
@@ -100,43 +98,6 @@ fun HomeScreen(
             ) {
                 Text("Logout")
             }
-        }
-    }
-}
-
-@Composable
-private fun NavigationCard(
-    icon: ImageVector,
-    title: String,
-    onClick: () -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 12.dp)
-            .clickable(onClick = onClick)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
-            Text(
-                text = title,
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 16.dp)
-            )
-            Icon(
-                imageVector = Icons.Default.ArrowForward,
-                contentDescription = "Navigate"
-            )
         }
     }
 }

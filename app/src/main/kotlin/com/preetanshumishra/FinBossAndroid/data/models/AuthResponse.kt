@@ -8,10 +8,3 @@ data class AuthResponse(
     val accessToken: String,
     val refreshToken: String
 )
-
-fun AuthResponse.toUser() = User(
-    id = userId,
-    email = email,
-    firstName = firstName,
-    lastName = lastName
-)

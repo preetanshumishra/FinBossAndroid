@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.preetanshumishra.FinBossAndroid.services.AuthService
 import com.preetanshumishra.FinBossAndroid.utils.Resource
+import com.preetanshumishra.FinBossAndroid.utils.toUser
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -82,12 +83,3 @@ class LoginViewModel(
         }
     }
 }
-
-// Extension function to convert AuthResponse to User
-fun com.preetanshumishra.FinBossAndroid.data.models.AuthResponse.toUser() =
-    com.preetanshumishra.FinBossAndroid.data.models.User(
-        id = userId,
-        email = email,
-        firstName = firstName,
-        lastName = lastName
-    )
