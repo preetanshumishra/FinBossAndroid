@@ -80,6 +80,14 @@ class AuthService @Inject constructor(
         _isLoggedIn.value = true
     }
 
+    suspend fun logout() {
+        val refreshToken = tokenManager.getRefreshTokenSync()
+        if (refreshToken != null) {
+            try { apiService.logout(mapOf("refreshToken" to refreshToken)) } catch (_: Exception) {}
+        }
+        clearAuthentication()
+    }
+
     suspend fun clearAuthentication() {
         tokenManager.clearTokens()
         _user.value = null

@@ -41,6 +41,10 @@ class TokenManager(
         prefs[REFRESH_TOKEN_KEY]
     }
 
+    suspend fun getRefreshTokenSync(): String? {
+        return context.dataStore.data.first()[REFRESH_TOKEN_KEY]
+    }
+
     suspend fun clearTokens() {
         context.dataStore.edit { prefs ->
             prefs.clear()

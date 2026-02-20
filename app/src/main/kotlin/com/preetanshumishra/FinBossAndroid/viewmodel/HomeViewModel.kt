@@ -15,7 +15,7 @@ class HomeViewModel(
 
     fun logout() {
         viewModelScope.launch {
-            authService.clearAuthentication()
+            authService.logout()
         }
     }
 }

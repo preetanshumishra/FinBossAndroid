@@ -98,6 +98,10 @@ class RegisterViewModel(
                 _errorMessage.value = "Password is required"
                 false
             }
+            _password.value.length < 8 -> {
+                _errorMessage.value = "Password must be at least 8 characters"
+                false
+            }
             else -> true
         }
     }

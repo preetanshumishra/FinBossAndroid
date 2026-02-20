@@ -29,6 +29,9 @@ interface ApiService {
     @POST("/api/v1/auth/refresh")
     suspend fun refreshToken(@Body refreshToken: Map<String, String>): ApiResponse<Map<String, String>>
 
+    @POST("/api/v1/auth/logout")
+    suspend fun logout(@Body body: Map<String, String>): ApiResponse<Unit?>
+
     @GET("/api/v1/transactions")
     suspend fun getTransactions(): ApiResponse<List<Transaction>>
 
