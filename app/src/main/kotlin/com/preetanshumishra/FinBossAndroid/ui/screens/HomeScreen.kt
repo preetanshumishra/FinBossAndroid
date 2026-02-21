@@ -82,7 +82,7 @@ fun HomeScreen(
             NavigationCard(
                 icon = Icons.Default.Home,
                 title = "Analytics",
-                onClick = { /* TODO: Navigate to Analytics */ }
+                onClick = { navController?.navigate("analytics") }
             )
 
             Spacer(modifier = Modifier.weight(1f))

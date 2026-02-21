@@ -11,6 +11,7 @@ class ViewModelFactory : ViewModelProvider.Factory {
             RegisterViewModel::class.java -> RegisterViewModel(appDependencies.authService)
             HomeViewModel::class.java -> HomeViewModel(appDependencies.authService)
             TransactionViewModel::class.java -> TransactionViewModel(appDependencies.transactionService)
+            AnalyticsViewModel::class.java -> AnalyticsViewModel(appDependencies.analyticsService)
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
         return vm as T

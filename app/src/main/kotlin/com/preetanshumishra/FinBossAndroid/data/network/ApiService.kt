@@ -6,6 +6,7 @@ import com.preetanshumishra.FinBossAndroid.data.models.CreateTransactionRequest
 import com.preetanshumishra.FinBossAndroid.data.models.LoginRequest
 import com.preetanshumishra.FinBossAndroid.data.models.RegisterRequest
 import com.preetanshumishra.FinBossAndroid.data.models.Transaction
+import com.preetanshumishra.FinBossAndroid.data.models.CategoryBreakdown
 import com.preetanshumishra.FinBossAndroid.data.models.UpdateTransactionRequest
 import com.preetanshumishra.FinBossAndroid.data.models.User
 import retrofit2.http.Body
@@ -46,4 +47,7 @@ interface ApiService {
 
     @DELETE("/api/v1/transactions/{id}")
     suspend fun deleteTransaction(@Path("id") id: String): ApiResponse<Map<String, String>>
+
+    @GET("/api/v1/transactions/analytics/category")
+    suspend fun getCategoryBreakdown(): ApiResponse<List<CategoryBreakdown>>
 }

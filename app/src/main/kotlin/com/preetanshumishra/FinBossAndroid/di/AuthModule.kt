@@ -3,6 +3,7 @@ package com.preetanshumishra.FinBossAndroid.di
 import com.preetanshumishra.FinBossAndroid.data.local.TokenManager
 import com.preetanshumishra.FinBossAndroid.data.network.ApiService
 import com.preetanshumishra.FinBossAndroid.services.AuthService
+import com.preetanshumishra.FinBossAndroid.services.AnalyticsService
 import com.preetanshumishra.FinBossAndroid.services.TransactionService
 import dagger.Module
 import dagger.Provides
@@ -27,4 +28,8 @@ object AuthModule {
     ): TransactionService {
         return TransactionService(apiService)
     }
+
+    @Provides
+    @Singleton
+    fun provideAnalyticsService(apiService: ApiService): AnalyticsService = AnalyticsService(apiService)
 }

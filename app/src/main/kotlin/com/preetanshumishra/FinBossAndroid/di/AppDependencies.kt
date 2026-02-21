@@ -4,6 +4,7 @@ import android.content.Context
 import com.preetanshumishra.FinBossAndroid.data.local.TokenManager
 import com.preetanshumishra.FinBossAndroid.data.network.ApiService
 import com.preetanshumishra.FinBossAndroid.services.AuthService
+import com.preetanshumishra.FinBossAndroid.services.AnalyticsService
 import com.preetanshumishra.FinBossAndroid.services.TransactionService
 
 /**
@@ -33,6 +34,7 @@ class AppDependencies(appComponent: AppComponent) {
     // All of these are created once and cached by Dagger
     val authService: AuthService = appComponent.authService
     val transactionService: TransactionService = appComponent.transactionService
+    val analyticsService: AnalyticsService = appComponent.analyticsService
     val tokenManager: TokenManager = appComponent.tokenManager
     val apiService: ApiService = appComponent.apiService
 }

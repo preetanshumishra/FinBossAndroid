@@ -5,6 +5,7 @@ import com.preetanshumishra.FinBossAndroid.MainActivity
 import com.preetanshumishra.FinBossAndroid.data.local.TokenManager
 import com.preetanshumishra.FinBossAndroid.data.network.ApiService
 import com.preetanshumishra.FinBossAndroid.services.AuthService
+import com.preetanshumishra.FinBossAndroid.services.AnalyticsService
 import com.preetanshumishra.FinBossAndroid.services.TransactionService
 import dagger.BindsInstance
 import dagger.Component
@@ -54,6 +55,7 @@ interface AppComponent {
     // These allow AppDependencies to access the singletons
     val authService: AuthService
     val transactionService: TransactionService
+    val analyticsService: AnalyticsService
     val tokenManager: TokenManager
     val apiService: ApiService
 }
