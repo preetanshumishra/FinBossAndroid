@@ -213,7 +213,7 @@ private const val BASE_URL = "http://localhost:5000" // Physical device
 
 For production:
 ```kotlin
-private const val BASE_URL = "https://finbossapi-production.up.railway.app"
+private const val BASE_URL = "https://finbossapi-gx2r7kziwa-uc.a.run.app"
 ```
 
 ### Build Configuration
