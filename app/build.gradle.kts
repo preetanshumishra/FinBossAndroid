@@ -36,10 +36,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_21
     }
 
-    kotlin {
-        jvmToolchain(22)
-    }
-
     buildFeatures {
         compose = true
     }
