@@ -76,7 +76,7 @@ fun HomeScreen(
             NavigationCard(
                 icon = Icons.Default.Info,
                 title = "Budgets",
-                onClick = { /* TODO: Navigate to Budgets */ }
+                onClick = { navController?.navigate("budgets") }
             )
 
             NavigationCard(

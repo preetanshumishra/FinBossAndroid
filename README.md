@@ -28,14 +28,25 @@ FinBossAndroid/
 │   │   ├── main/
 │   │   │   ├── kotlin/com/preetanshumishra/FinBossAndroid/
 │   │   │   │   ├── MainActivity.kt
+│   │   │   │   ├── data/
+│   │   │   │   │   ├── models/             # API DTOs (Transaction, User, etc.)
+│   │   │   │   │   └── network/ApiService.kt
+│   │   │   │   ├── di/                     # Dagger modules + AppDependencies
+│   │   │   │   ├── services/               # AuthService, TransactionService, AnalyticsService
+│   │   │   │   ├── viewmodel/              # *ViewModel + ViewModelFactory
 │   │   │   │   ├── ui/
+│   │   │   │   │   ├── components/         # Reusable composables (NavigationCard, TransactionCard)
+│   │   │   │   │   ├── navigation/NavGraph.kt
 │   │   │   │   │   ├── screens/
-│   │   │   │   │   │   └── LoginScreen.kt
-│   │   │   │   │   └── theme/
-│   │   │   │   │       └── Theme.kt
-│   │   │   │   ├── network/
-│   │   │   │   │   └── ApiClient.kt
-│   │   │   │   └── viewmodel/
+│   │   │   │   │   │   ├── LoginScreen.kt
+│   │   │   │   │   │   ├── RegisterScreen.kt
+│   │   │   │   │   │   ├── HomeScreen.kt
+│   │   │   │   │   │   ├── TransactionListScreen.kt
+│   │   │   │   │   │   ├── CreateTransactionScreen.kt
+│   │   │   │   │   │   ├── BudgetsScreen.kt           # Placeholder
+│   │   │   │   │   │   └── AnalyticsScreen.kt
+│   │   │   │   │   └── theme/Theme.kt
+│   │   │   │   └── utils/
 │   │   │   ├── AndroidManifest.xml
 │   │   │   └── res/
 │   │   ├── androidTest/
@@ -219,8 +230,8 @@ private const val BASE_URL = "https://finbossapi-618844932346.us-central1.run.ap
 ### Build Configuration
 Minimum SDK is configured in `app/build.gradle.kts`:
 ```kotlin
-minSdk = 24
-targetSdk = 34
+minSdk = 28
+targetSdk = 36
 ```
 
 ## Features
@@ -233,8 +244,10 @@ targetSdk = 34
 - ✅ Dagger Dependency Injection
 - ✅ Room Database Support
 - ✅ Coroutines & Flow for reactive state
-- ✅ Transaction Management
-- ✅ Android 7.0+ Compatibility
+- ✅ Transaction Management — list, create (form with type, amount, category, description, date picker), delete
+- ✅ Analytics (category breakdown)
+- 🚧 Budgets — placeholder screen wired into navigation; full feature pending (no backend client wiring yet)
+- ✅ Android 9.0+ Compatibility (`minSdk = 28`)
 
 ## Development Guidelines
 

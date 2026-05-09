@@ -10,10 +10,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.preetanshumishra.FinBossAndroid.services.AuthService
+import com.preetanshumishra.FinBossAndroid.ui.screens.AnalyticsScreen
+import com.preetanshumishra.FinBossAndroid.ui.screens.BudgetsScreen
+import com.preetanshumishra.FinBossAndroid.ui.screens.CreateTransactionScreen
 import com.preetanshumishra.FinBossAndroid.ui.screens.HomeScreen
 import com.preetanshumishra.FinBossAndroid.ui.screens.LoginScreen
 import com.preetanshumishra.FinBossAndroid.ui.screens.RegisterScreen
-import com.preetanshumishra.FinBossAndroid.ui.screens.AnalyticsScreen
 import com.preetanshumishra.FinBossAndroid.ui.screens.TransactionListScreen
 
 @Composable
@@ -35,7 +37,13 @@ fun SetupNavGraph(authService: AuthService) {
             HomeScreen(navController = navController)
         }
         composable("transactions") {
-            TransactionListScreen()
+            TransactionListScreen(navController = navController)
+        }
+        composable("create-transaction") {
+            CreateTransactionScreen(navController = navController)
+        }
+        composable("budgets") {
+            BudgetsScreen(navController = navController)
         }
         composable("analytics") {
             AnalyticsScreen()

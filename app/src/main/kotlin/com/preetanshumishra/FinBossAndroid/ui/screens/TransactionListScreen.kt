@@ -12,13 +12,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
+import androidx.navigation.NavController
 import com.preetanshumishra.FinBossAndroid.ui.components.TransactionCard
 import com.preetanshumishra.FinBossAndroid.viewmodel.TransactionViewModel
 import com.preetanshumishra.FinBossAndroid.viewmodel.ViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TransactionListScreen() {
+fun TransactionListScreen(
+    navController: NavController? = null
+) {
     val owner = LocalViewModelStoreOwner.current ?: error("No ViewModel store owner found")
     val viewModel = remember(owner) {
         ViewModelProvider(owner.viewModelStore, ViewModelFactory()).get(TransactionViewModel::class.java)
@@ -38,7 +41,7 @@ fun TransactionListScreen() {
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { /* TODO: Navigate to create transaction */ },
+                onClick = { navController?.navigate("create-transaction") },
                 containerColor = MaterialTheme.colorScheme.primary
             ) {
                 Icon(Icons.Default.Add, contentDescription = "Add Transaction")
